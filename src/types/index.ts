@@ -97,8 +97,8 @@ export interface InspectionCheck {
   checkId: string;
   label: string;
   result: CheckResult | null;
-  comment?: string;
-  defectType?: string;
+  comment?: string | undefined;
+  defectType?: string | undefined;
 }
 
 export interface InspectionMeasurement {

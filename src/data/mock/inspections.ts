@@ -38,7 +38,7 @@ function buildChecks(articleId: string, seed: number, ncIndexes: number[] = []):
       label: c.label,
       result: isNc ? "NC" : "C",
       comment: isNc ? "Défaut détecté sur 3 pièces du prélèvement." : undefined,
-      defectType: isNc ? defectTypes[Math.floor(seeded(seed + i) * defectTypes.length)] : undefined,
+      defectType: isNc ? defectTypes[Math.floor(seeded(seed + i) * defectTypes.length)]! : undefined,
     };
   });
 }
@@ -103,7 +103,7 @@ function build(seed: Seed, index: number): Inspection {
   return {
     id: seed.id,
     date: seed.date,
-    slot: timeSlots[seed.slotIndex],
+    slot: timeSlots[seed.slotIndex]!,
     ofId: seed.ofId,
     machineId: seed.machineId,
     articleId: seed.articleId,
@@ -121,7 +121,7 @@ function build(seed: Seed, index: number): Inspection {
       regleur: index % 2 === 0 ? "Mehdi Ouazzani" : "Rachid Belkacem",
       compteurMachine: seed.counter,
       quantiteDechets: seed.waste,
-      natureDechets: wasteNatures[index % wasteNatures.length],
+      natureDechets: wasteNatures[index % wasteNatures.length]!,
       cycle: Number((18 + seeded(index) * 4).toFixed(1)),
       poids: Number((42 + seeded(index + 11) * 5).toFixed(1)),
     },
