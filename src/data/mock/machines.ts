@@ -1,0 +1,56 @@
+import type { Machine } from "@/types";
+
+export const mockMachines: Machine[] = [
+  {
+    id: "mch-01",
+    code: "MCH-01",
+    name: "Machine 01",
+    status: "running",
+    location: "Atelier A — Ligne 1",
+    currentOfId: "of-001",
+    currentArticleId: "art-001",
+    currentOperator: "Youssef Amrani",
+    lastInspectionAt: "2026-08-24T10:00:00Z",
+    nextInspectionAt: "2026-08-24T12:00:00Z",
+    qcStatus: "conforme",
+    downtimeMinutesToday: 12,
+    problems: [
+      { id: "pb-1", label: "Panne machine — vérin d'éjection", at: "2026-08-24T09:12:00Z", durationMinutes: 12, severity: "medium" },
+    ],
+  },
+  {
+    id: "mch-02",
+    code: "MCH-02",
+    name: "Machine 02",
+    status: "warning",
+    location: "Atelier A — Ligne 2",
+    currentOfId: "of-002",
+    currentArticleId: "art-002",
+    currentOperator: "Karim Haddad",
+    lastInspectionAt: "2026-08-24T10:00:00Z",
+    nextInspectionAt: "2026-08-24T12:00:00Z",
+    qcStatus: "non_conforme",
+    downtimeMinutesToday: 38,
+    problems: [
+      { id: "pb-2", label: "Manque de matière", at: "2026-08-24T08:40:00Z", durationMinutes: 26, severity: "high" },
+      { id: "pb-3", label: "Nettoyage moule", at: "2026-08-24T06:15:00Z", durationMinutes: 12, severity: "low" },
+    ],
+  },
+  {
+    id: "mch-03",
+    code: "MCH-03",
+    name: "Machine 03",
+    status: "maintenance",
+    location: "Atelier B — Ligne 1",
+    currentOfId: "of-003",
+    currentArticleId: "art-003",
+    currentOperator: "Imane Tazi",
+    lastInspectionAt: "2026-08-24T08:00:00Z",
+    nextInspectionAt: "2026-08-24T14:00:00Z",
+    qcStatus: "pending",
+    downtimeMinutesToday: 95,
+    problems: [
+      { id: "pb-4", label: "Maintenance préventive planifiée", at: "2026-08-24T07:00:00Z", durationMinutes: 95, severity: "medium" },
+    ],
+  },
+];
