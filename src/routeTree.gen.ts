@@ -10,11 +10,21 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ArticlesRouteImport } from './routes/articles'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as MachinesRouteImport } from './routes/machines'
+import { Route as OfsRouteImport } from './routes/ofs'
+import { Route as ScanRouteImport } from './routes/scan'
+import { Route as ArticlesArticleIdRouteImport } from './routes/articles.$articleId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArticlesRoute = ArticlesRouteImport.update({
+  id: '/articles',
+  path: '/articles',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -22,31 +32,92 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MachinesRoute = MachinesRouteImport.update({
+  id: '/machines',
+  path: '/machines',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OfsRoute = OfsRouteImport.update({
+  id: '/ofs',
+  path: '/ofs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScanRoute = ScanRouteImport.update({
+  id: '/scan',
+  path: '/scan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ArticlesArticleIdRoute = ArticlesArticleIdRouteImport.update({
+  id: '/$articleId',
+  path: '/$articleId',
+  getParentRoute: () => ArticlesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/articles': typeof ArticlesRouteWithChildren
   '/login': typeof LoginRoute
+  '/machines': typeof MachinesRoute
+  '/ofs': typeof OfsRoute
+  '/scan': typeof ScanRoute
+  '/articles/$articleId': typeof ArticlesArticleIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/articles': typeof ArticlesRouteWithChildren
   '/login': typeof LoginRoute
+  '/machines': typeof MachinesRoute
+  '/ofs': typeof OfsRoute
+  '/scan': typeof ScanRoute
+  '/articles/$articleId': typeof ArticlesArticleIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/articles': typeof ArticlesRouteWithChildren
   '/login': typeof LoginRoute
+  '/machines': typeof MachinesRoute
+  '/ofs': typeof OfsRoute
+  '/scan': typeof ScanRoute
+  '/articles/$articleId': typeof ArticlesArticleIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login'
+  fullPaths:
+    | '/'
+    | '/articles'
+    | '/login'
+    | '/machines'
+    | '/ofs'
+    | '/scan'
+    | '/articles/$articleId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login'
-  id: '__root__' | '/' | '/login'
+  to:
+    | '/'
+    | '/articles'
+    | '/login'
+    | '/machines'
+    | '/ofs'
+    | '/scan'
+    | '/articles/$articleId'
+  id:
+    | '__root__'
+    | '/'
+    | '/articles'
+    | '/login'
+    | '/machines'
+    | '/ofs'
+    | '/scan'
+    | '/articles/$articleId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ArticlesRoute: typeof ArticlesRouteWithChildren
   LoginRoute: typeof LoginRoute
+  MachinesRoute: typeof MachinesRoute
+  OfsRoute: typeof OfsRoute
+  ScanRoute: typeof ScanRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +129,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/articles': {
+      id: '/articles'
+      path: '/articles'
+      fullPath: '/articles'
+      preLoaderRoute: typeof ArticlesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -65,12 +143,56 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/machines': {
+      id: '/machines'
+      path: '/machines'
+      fullPath: '/machines'
+      preLoaderRoute: typeof MachinesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ofs': {
+      id: '/ofs'
+      path: '/ofs'
+      fullPath: '/ofs'
+      preLoaderRoute: typeof OfsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/scan': {
+      id: '/scan'
+      path: '/scan'
+      fullPath: '/scan'
+      preLoaderRoute: typeof ScanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/articles/$articleId': {
+      id: '/articles/$articleId'
+      path: '/$articleId'
+      fullPath: '/articles/$articleId'
+      preLoaderRoute: typeof ArticlesArticleIdRouteImport
+      parentRoute: typeof ArticlesRoute
+    }
   }
 }
 
+interface ArticlesRouteChildren {
+  ArticlesArticleIdRoute: typeof ArticlesArticleIdRoute
+}
+
+const ArticlesRouteChildren: ArticlesRouteChildren = {
+  ArticlesArticleIdRoute: ArticlesArticleIdRoute,
+}
+
+const ArticlesRouteWithChildren = ArticlesRoute._addFileChildren(
+  ArticlesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ArticlesRoute: ArticlesRouteWithChildren,
   LoginRoute: LoginRoute,
+  MachinesRoute: MachinesRoute,
+  OfsRoute: OfsRoute,
+  ScanRoute: ScanRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
