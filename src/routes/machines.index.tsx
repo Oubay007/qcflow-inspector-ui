@@ -10,7 +10,7 @@ import { machineService } from "@/services/api/machineService";
 import { ofService } from "@/services/api/ofService";
 import { articleService } from "@/services/api/articleService";
 
-export const Route = createFileRoute("/machines")({
+export const Route = createFileRoute("/machines/")({
   head: () => ({
     meta: [
       { title: "Machines — QC Flow" },

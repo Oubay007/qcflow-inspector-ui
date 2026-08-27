@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/dialog";
 import { articleService } from "@/services/api/articleService";
 
-export const Route = createFileRoute("/articles")({
+export const Route = createFileRoute("/articles/")({
   head: () => ({
     meta: [
       { title: "Articles & tolerances — QC Flow" },
