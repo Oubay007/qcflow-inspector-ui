@@ -23,16 +23,17 @@ import { StatusBadge } from "@/components/common/StatusBadge";
 
 const NAV = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard, exact: true },
-  { to: "/inspection", label: "Current inspection", icon: ClipboardCheck },
-  { to: "/ofs", label: "Production orders", icon: Boxes },
-  { to: "/machines", label: "Machines", icon: Cpu },
-  { to: "/articles", label: "Articles & tolerances", icon: Activity },
-  { to: "/history", label: "Inspection history", icon: History },
-  { to: "/reports", label: "Reports", icon: FileBarChart },
-  { to: "/analytics", label: "Analytics", icon: BarChart3 },
-  { to: "/users", label: "Users", icon: Users },
-  { to: "/settings", label: "Settings", icon: Settings },
+  { to: "/inspection", label: "Current inspection", icon: ClipboardCheck, exact: false },
+  { to: "/ofs", label: "Production orders", icon: Boxes, exact: false },
+  { to: "/machines", label: "Machines", icon: Cpu, exact: false },
+  { to: "/articles", label: "Articles & tolerances", icon: Activity, exact: false },
+  { to: "/history", label: "Inspection history", icon: History, exact: false },
+  { to: "/reports", label: "Reports", icon: FileBarChart, exact: false },
+  { to: "/analytics", label: "Analytics", icon: BarChart3, exact: false },
+  { to: "/users", label: "Users", icon: Users, exact: false },
+  { to: "/settings", label: "Settings", icon: Settings, exact: false },
 ] as const;
+
 
 export function AppShell({ children }: { children: ReactNode }) {
   const { user, ready, logout } = useAuth();
