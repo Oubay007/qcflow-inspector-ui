@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as InspectionRouteImport } from './routes/inspection'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as OfsRouteImport } from './routes/ofs'
 import { Route as ScanRouteImport } from './routes/scan'
@@ -20,6 +21,11 @@ import { Route as MachinesIndexRouteImport } from './routes/machines.index'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InspectionRoute = InspectionRouteImport.update({
+  id: '/inspection',
+  path: '/inspection',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -55,6 +61,7 @@ const MachinesIndexRoute = MachinesIndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/inspection': typeof InspectionRoute
   '/login': typeof LoginRoute
   '/ofs': typeof OfsRoute
   '/scan': typeof ScanRoute
@@ -64,6 +71,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/inspection': typeof InspectionRoute
   '/login': typeof LoginRoute
   '/ofs': typeof OfsRoute
   '/scan': typeof ScanRoute
@@ -74,6 +82,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/inspection': typeof InspectionRoute
   '/login': typeof LoginRoute
   '/ofs': typeof OfsRoute
   '/scan': typeof ScanRoute
@@ -85,6 +94,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/inspection'
     | '/login'
     | '/ofs'
     | '/scan'
@@ -94,6 +104,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/inspection'
     | '/login'
     | '/ofs'
     | '/scan'
@@ -103,6 +114,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/inspection'
     | '/login'
     | '/ofs'
     | '/scan'
@@ -113,6 +125,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  InspectionRoute: typeof InspectionRoute
   LoginRoute: typeof LoginRoute
   OfsRoute: typeof OfsRoute
   ScanRoute: typeof ScanRoute
@@ -128,6 +141,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inspection': {
+      id: '/inspection'
+      path: '/inspection'
+      fullPath: '/inspection'
+      preLoaderRoute: typeof InspectionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -177,6 +197,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  InspectionRoute: InspectionRoute,
   LoginRoute: LoginRoute,
   OfsRoute: OfsRoute,
   ScanRoute: ScanRoute,
